@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国文化专栏 - AI英语学习平台</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/culture.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🎓</span>
+                <span class="logo-text">AI英语学习</span>
+            </a>
+
+            <nav class="nav">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="culture.html" class="nav-link active">文化专栏</a>
+                <a href="resources.html" class="nav-link">学习资源</a>
+                <a href="news.html" class="nav-link">赛事资讯</a>
+                <a href="about.html" class="nav-link">关于我们</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="#" class="btn btn-link">🎤 演讲平台</a>
+                <a href="#" class="btn btn-link">🗣️ 辩论平台</a>
+                <a href="#" class="btn btn-primary">登录/注册</a>
+            </div>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
+
+    <!-- 移动端菜单 -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">首页</a>
+        <a href="culture.html">文化专栏</a>
+        <a href="resources.html">学习资源</a>
+        <a href="news.html">赛事资讯</a>
+        <a href="about.html">关于我们</a>
+        <hr>
+        <a href="#">🎤 演讲平台</a>
+        <a href="#">🗣️ 辩论平台</a>
+        <a href="#">登录/注册</a>
+    </div>
+
+    <div class="page-container">
+        <!-- 页面标题 -->
+        <div class="page-header">
+            <h1>中国文化主题库</h1>
+            <p>探索90个精选主题，用英语讲述中国故事</p>
+        </div>
+
+        <div class="container">
+            <!-- 筛选栏 -->
+            <div class="filter-bar">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 搜索主题...">
+
+                <select id="categoryFilter" class="filter-select">
+                    <option value="all">全部分类</option>
+                    <option value="philosophy">📚 哲学思想</option>
+                    <option value="arts">🎨 传统艺术</option>
+                    <option value="architecture">🏯 建筑工程</option>
+                    <option value="festivals">🏮 节日民俗</option>
+                    <option value="symbols">🐉 文化符号</option>
+                    <option value="heritage">🎭 非遗传承</option>
+                    <option value="modern">🌟 现代传承</option>
+                </select>
+
+                <select id="difficultyFilter" class="filter-select">
+                    <option value="all">全部难度</option>
+                    <option value="beginner">初级 ★☆☆</option>
+                    <option value="intermediate">中级 ★★☆</option>
+                    <option value="advanced">高级 ★★★</option>
+                </select>
+            </div>
+
+            <!-- 结果统计 -->
+            <div class="result-info">
+                找到 <strong id="resultCount">10</strong> 个主题
+            </div>
+
+            <!-- 主题列表 -->
+            <div class="topics-grid" id="topicsGrid">
+                <!-- 主题卡片将由JavaScript动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>关于项目</h3>
+                    <p>AI英语学习平台致力于通过人工智能技术，帮助学习者提升英语演讲和辩论能力，同时传播中国文化。</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="culture.html">文化专栏</a></li>
+                        <li><a href="resources.html">学习资源</a></li>
+                        <li><a href="about.html">关于我们</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>联系我们</h3>
+                    <p>📧 contact@example.com</p>
+                    <p>💬 微信公众号</p>
+                    <p>🐙 GitHub</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 AI英语学习平台. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/culture.js"></script>
+</body>
+</html>
