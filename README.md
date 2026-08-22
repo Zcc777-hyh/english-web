@@ -1,250 +1,440 @@
-# AI英语学习平台 - 使用说明
+# AI英语学习推广网站
 
-## 🎉 项目完成情况
+> 讲好中国故事，用世界语言传播中华文明
 
-✅ 首页（index.html）- 品牌展示  
-✅ 文化专栏（culture.html）- 10个主题展示  
-✅ 学习资源（resources.html）- 学习指南  
-✅ 关于我们（about.html）- 项目介绍  
-✅ 响应式设计 - 完美支持手机和电脑  
-✅ 性能优化 - 移除外部字体，加载速度提升80%
+## 🌟 项目介绍
 
----
+这是一个专注于推广AI英语学习的宣传网站，特色是融合了**90个中国文化主题**，帮助学习者提升英语演讲和辩论能力的同时，传播中华文化。
 
-## ✅ 已解决的问题
-
-### 1. 网站加载慢 - 已优化
-**问题**：加载需要2-3秒  
-**解决**：移除Google字体，改用系统字体  
-**结果**：加载时间 < 0.5秒
-
-### 2. 云服务器部署 - 提供方案
-查看 `部署指南.md` 获取详细步骤
-
-**推荐方案**：
-- 🥇 Vercel（免费，最快最简单）
-- 🥈 阿里云服务器（国内访问快）
-- 🥉 Netlify（免费）
-
-### 3. 图片和Logo替换 - 提供指南
-查看 `部署指南.md` 第三部分
-
----
-
-## 📁 项目文件结构
-
-```
-web/
-├── index.html              # 首页
-├── culture.html           # 文化专栏
-├── resources.html         # 学习资源
-├── about.html             # 关于我们
-├── 部署指南.md            # 部署和优化指南
-├── css/
-│   ├── style.css          # 主样式（已优化）
-│   └── culture.css        # 文化专栏样式
-├── js/
-│   ├── main.js            # 主逻辑
-│   └── culture.js         # 文化专栏数据（10个主题）
-└── images/
-    ├── logo/              # Logo文件夹（待添加）
-    ├── topics/            # 主题配图（待添加）
-    └── hero/              # 首页大图（待添加）
-```
+### 项目分工
+- **本网站（你负责）**：推广宣传、文化展示、学习资源
+- **演讲平台（队友负责）**：AI智能演讲训练和评分
+- **辩论平台（队友负责）**：AI辩论对战和点评
 
 ---
 
 ## 🚀 快速开始
 
 ### 本地预览
-1. 用浏览器打开 `index.html`
-2. 或在 IntelliJ IDEA 中右键 → Open in Browser
 
-### 修改内容
-- **修改颜色**：编辑 `css/style.css` 中的 `:root` 变量
-- **添加主题**：编辑 `js/culture.js` 中的 `topics` 数组
-- **更换Logo**：替换 `images/logo/` 中的文件
+1. 直接打开浏览器访问：
+   ```
+   file:///D:/JavaWeb/English-web/web/index.html
+   ```
 
----
+2. 或使用本地服务器（推荐）：
+   ```bash
+   # 方法1：使用Python
+   cd D:/JavaWeb/English-web/web
+   python -m http.server 8080
+   # 访问 http://localhost:8080
 
-## 🖼️ Logo 和图片替换步骤
+   # 方法2：使用Node.js
+   npx http-server -p 8080
+   # 访问 http://localhost:8080
 
-### 步骤1：准备Logo
-1. 访问 https://www.canva.cn/
-2. 搜索"教育Logo"，选择模板
-3. 修改颜色为中国红 (#DC143C)
-4. 下载以下三个尺寸：
-   - `logo.png` (200x200px) - 大Logo
-   - `logo-sm.png` (64x64px) - 小Logo  
-   - `favicon.ico` (32x32px) - 网站图标
-
-### 步骤2：保存Logo
-```
-将文件保存到：
-D:\JavaWeb\English-web\web\images\logo\
-├── logo.png
-├── logo-sm.png
-└── favicon.ico
-```
-
-### 步骤3：更新HTML代码
-
-在所有页面的 `<head>` 标签中添加：
-```html
-<link rel="icon" type="image/x-icon" href="images/logo/favicon.ico">
-```
-
-替换所有页面中的Logo代码：
-```html
-<!-- 找到这段代码 -->
-<span class="logo-icon">🎓</span>
-
-<!-- 替换为 -->
-<img src="images/logo/logo-sm.png" alt="Logo" class="logo-icon" style="width: 36px; height: 36px;">
-```
-
-### 步骤4：准备主题配图
-
-**推荐图片来源**（免费）：
-- Unsplash: https://unsplash.com/s/photos/chinese-culture
-- Pexels: https://www.pexels.com/search/chinese/
-- Pixabay: https://pixabay.com/
-
-**下载图片后**：
-1. 压缩图片：https://tinypng.com/
-2. 重命名为：`philosophy-1.jpg`, `arts-1.jpg` 等
-3. 保存到：`D:\JavaWeb\English-web\web\images\topics/`
-
-### 步骤5：更新代码使用真实图片
-
-编辑 `js/culture.js`，将每个主题的 `background` 改为 `image`：
-
-```javascript
-// 原代码
-{
-    id: 1,
-    emoji: '📚',
-    background: 'linear-gradient(135deg, #FFF5F5, #FFE5E9)',
-}
-
-// 改为
-{
-    id: 1,
-    image: 'images/topics/philosophy-1.jpg',
-}
-```
-
-然后在渲染函数中修改：
-```javascript
-// 原代码
-<div class="topic-card-header" style="background: ${topic.background}">
-    <span class="topic-emoji">${topic.emoji}</span>
-
-// 改为
-<div class="topic-card-header" style="background: url('${topic.image}') center/cover; background-size: cover;">
-    <!-- 移除 emoji -->
-```
+   # 方法3：使用VS Code插件 Live Server
+   # 右键 index.html → "Open with Live Server"
+   ```
 
 ---
 
-## ☁️ 云端部署（三选一）
+## 📦 部署到Vercel
 
-### 方案1：Vercel部署（最简单，推荐）
+### 方式1：通过GitHub（推荐）
+
+1. **创建GitHub仓库**
+   ```bash
+   # 在GitHub上创建新仓库：ai-english-learning-web
+   
+   # 推送代码
+   git remote add origin https://github.com/你的用户名/ai-english-learning-web.git
+   git branch -M main
+   git push -u origin main
+   ```
+
+2. **部署到Vercel**
+   - 访问 https://vercel.com
+   - 使用GitHub登录
+   - 点击 "Import Project"
+   - 选择你的仓库
+   - 点击 "Deploy"
+   - 完成！✅
+
+3. **获取访问地址**
+   ```
+   https://你的项目名.vercel.app
+   ```
+
+### 方式2：通过Vercel CLI
 
 ```bash
-# 1. 安装Node.js (如果没有)
-# 下载：https://nodejs.org/
-
-# 2. 安装Vercel CLI
+# 安装Vercel CLI
 npm install -g vercel
 
-# 3. 在项目目录执行
-cd D:\JavaWeb\English-web\web
-vercel
+# 登录
+vercel login
 
-# 4. 按提示登录并部署
-# 完成后会获得一个URL：https://your-project.vercel.app
+# 部署
+cd D:/JavaWeb/English-web/web
+vercel --prod
 ```
 
-### 方案2：Netlify部署（拖拽上传）
-
-1. 访问 https://app.netlify.com/drop
-2. 将整个 `web` 文件夹拖到页面中
-3. 等待上传完成
-4. 获得访问链接
-
-### 方案3：阿里云服务器
-
-详细步骤见 `部署指南.md`
+📖 **详细教程**：查看 [Vercel部署完整指南.md](./Vercel部署完整指南.md)
 
 ---
 
-## 🔧 常见修改
+## 🎯 网站功能
 
-### 修改主题色
-编辑 `css/style.css`：
+### ✅ 已完成功能
+
+1. **首页**
+   - Hero区域（背景图片 + 标题）
+   - 树状结构导航（三个平台入口）
+   - 平台介绍
+   - 使用流程
+
+2. **中国文化专栏** ⭐ 核心特色
+   - 90个演讲主题（基于文档《中国文化演讲题目(1).docx》）
+   - 7大分类：
+     - 哲学思想（12题）
+     - 传统艺术（15题）
+     - 建筑工程（8题）
+     - 节日民俗（10题）
+     - 文化符号（12题）
+     - 非遗传承（18题）
+     - 现代传承（15题）
+
+3. **学习资源中心**
+   - 演讲技巧指南
+   - 辩论技巧指南
+   - 核心词汇库
+
+4. **赛事资讯**
+   - 演讲比赛信息
+   - 辩论赛事预告
+
+5. **关于我们**
+   - 项目介绍
+   - 核心功能
+   - 联系方式
+
+### 🔗 外部链接（需要队友提供）
+
+- 演讲平台URL（Header导航 + 首页树状图）
+- 辩论平台URL（Header导航 + 首页树状图）
+- 用户登录URL（Header "登录/注册" 按钮）
+
+---
+
+## 📱 微信小程序开发
+
+### 技术方案：uni-app（推荐）
+
+**为什么选择uni-app？**
+- ✅ 一次开发，多端运行（微信小程序 + 支付宝小程序 + H5 + App）
+- ✅ 使用Vue 3语法，学习成本低
+- ✅ 组件库丰富（uView UI）
+- ✅ 社区活跃，中文文档完善
+
+**开发周期**：4-5周
+
+📖 **详细规划**：查看 [微信小程序开发规划.md](./微信小程序开发规划.md)
+
+### 快速启动
+
+```bash
+# 方法1：使用HBuilderX（推荐新手）
+# 下载：https://www.dcloud.io/hbuilderx.html
+# 创建 → uni-app项目
+
+# 方法2：使用Vue CLI
+npm install -g @vue/cli
+npx degit dcloudio/uni-preset-vue#vite ai-english-miniprogram
+cd ai-english-miniprogram
+npm install
+npm run dev:mp-weixin
+```
+
+---
+
+## 🛠️ 技术栈
+
+### 当前网站（纯HTML版本）
+- HTML5
+- CSS3（响应式布局）
+- JavaScript（原生）
+- 部署：Vercel
+
+### 未来小程序版本
+- uni-app (Vue 3)
+- uView UI 2.0
+- 微信小程序API
+
+---
+
+## 📂 项目结构
+
+```
+web/
+├── index.html              # 首页
+├── culture.html            # 文化专栏
+├── resources.html          # 学习资源
+├── news.html              # 赛事资讯
+├── about.html             # 关于我们
+│
+├── css/
+│   ├── style.css          # 全局样式
+│   └── home.css           # 首页专用样式
+│
+├── images/
+│   └── background/
+│       └── 首页背景.png    # 首页背景图
+│
+├── js/
+│   └── script.js          # 全局脚本
+│
+├── documents/
+│   └── 中国文化演讲题目(1).docx  # 90个主题来源
+│
+├── vercel.json            # Vercel配置
+├── .gitignore             # Git忽略文件
+│
+├── Vercel部署完整指南.md   # 部署教程
+├── 微信小程序开发规划.md    # 小程序规划
+└── README.md              # 本文件
+```
+
+---
+
+## 🎨 设计特色
+
+### 视觉风格
+- **中国元素**：中国红(#DC143C)、金色(#FFD700)
+- **现代简洁**：响应式设计、流畅动画
+- **文化融合**：传统与现代结合
+
+### 核心配色
 ```css
-:root {
-    --primary-color: #DC143C;  /* 改为你想要的颜色 */
-}
+--primary-color: #DC143C;    /* 中国红 */
+--secondary-color: #4169E1;  /* 宝石蓝 */
+--accent-color: #FFD700;     /* 金色 */
+--text-color: #2C3E50;       /* 墨色 */
 ```
 
-### 添加更多主题
-编辑 `js/culture.js`，在 `topics` 数组中添加：
-```javascript
-{
-    id: 11,
-    titleEN: 'Your Topic Title',
-    titleCN: '你的主题标题',
-    category: 'philosophy',  // 选择分类
-    difficulty: 'beginner',  // 选择难度
-    // ...
-}
+---
+
+## 🔗 与队友平台对接
+
+### 当前方案：简单跳转
+
+网站通过链接按钮跳转到队友的云平台：
+
+```html
+<!-- 演讲平台 -->
+<a href="https://speech.example.com">🎤 演讲平台</a>
+
+<!-- 辩论平台 -->
+<a href="https://debate.example.com">🗣️ 辩论平台</a>
+
+<!-- 登录页面 -->
+<a href="https://login.example.com">登录/注册</a>
 ```
 
-### 连接队友平台
-等队友提供URL后，全局搜索并替换：
-- `#` 改为队友的实际链接
-- 搜索关键词：`href="#"` 或 `演讲平台` / `辩论平台`
+### 可选方案：URL参数传递
+
+如果队友平台支持，可以传递主题参数：
+
+```html
+<a href="https://speech.example.com?topic=confucius">
+  练习此主题
+</a>
+```
+
+### 需要队友提供
+
+1. **平台URL**
+   - 演讲平台：`https://???`
+   - 辩论平台：`https://???`
+   - 用户登录：`https://???`
+
+2. **可选：API接口**（小程序需要）
+   - 用户认证API
+   - 获取练习记录API
+   - 提交分享数据API
 
 ---
 
-## 📊 性能对比
+## 📊 90个文化主题分类
 
-| 优化项 | 优化前 | 优化后 | 提升 |
-|--------|--------|--------|------|
-| 首次加载 | 2.5s | 0.4s | 84% ⬇️ |
-| 页面大小 | 850KB | 120KB | 86% ⬇️ |
-| 字体请求 | 2个外部请求 | 0 | 100% ⬇️ |
+### 1. 哲学思想 (12题)
+- When Socrates Meets Confucius
+- The Unity of Knowledge and Action
+- Benevolence (Ren): a timeless Chinese virtue
+- ...
+
+### 2. 传统艺术 (15题)
+- The charm of Chinese calligraphy in a digital age
+- Chinese embroidery: beauty passed through generations
+- The cultural spirit of Chinese landscape painting
+- ...
+
+### 3. 建筑与工程 (8题)
+- Dujiangyan
+- The spirit of the Great Wall beyond military defense
+- Tulou: a treasure of Chinese communal wisdom
+- ...
+
+### 4. 节日与民俗 (10题)
+- The beauty of Chinese seasonal culture and the 24 Solar Terms
+- The meaning of reunion in Chinese culture
+- Chinese lanterns: light, hope and cultural memory
+- ...
+
+### 5. 文化符号 (12题)
+- The Chinese Dragon Is Good
+- Chopsticks: small objects carrying great Chinese values
+- The philosophy behind Tai Chi
+- ...
+
+### 6. 非遗传承 (18题)
+- Traditional Chinese medicine and its cross-cultural acceptance
+- How young people revitalize local traditional crafts
+- The inheritance of Chinese operas among Gen Z
+- ...
+
+### 7. 现代传承与国际传播 (15题)
+- How is modern China shaped by its traditional culture?
+- How can youth become bridge builders for Chinese-foreign cultural exchange?
+- The Story of Us: The Chineseness
+- ...
+
+📄 **完整列表**：查看 `documents/中国文化演讲题目(1).docx`
 
 ---
 
-## 📞 技术支持
+## ✅ 开发路线图
 
-### 联系方式
-- 项目文档：查看 `部署指南.md`
-- 问题反馈：记录在项目文档中
+### Phase 1: 网站部署 ✅ 已完成
+- [x] 完成HTML网站开发
+- [x] 初始化Git仓库
+- [x] 创建Vercel配置
+- [ ] 推送到GitHub
+- [ ] 部署到Vercel
+- [ ] 获取测试URL给用户体验
 
-### 下一步计划
-- [ ] 添加真实Logo和图片
-- [ ] 补充剩余80个文化主题
-- [ ] 连接队友的演讲/辩论平台
-- [ ] 部署到云服务器
-- [ ] 绑定自定义域名
+### Phase 2: 内容优化（进行中）
+- [ ] 从队友获取平台URL
+- [ ] 更新所有跳转链接
+- [ ] 整理90个主题详细内容
+- [ ] 添加主题详情页（可选）
+- [ ] 图片优化（压缩大小）
+
+### Phase 3: 微信小程序开发（未开始）
+- [ ] 注册微信小程序账号
+- [ ] 安装uni-app开发环境
+- [ ] 创建小程序项目
+- [ ] 开发核心页面
+- [ ] 对接队友API
+- [ ] 提交审核上线
+
+### Phase 4: 迭代优化
+- [ ] 根据用户反馈优化
+- [ ] 添加更多学习资源
+- [ ] SEO优化（网站）
+- [ ] 性能优化
 
 ---
 
-## 🎓 学习资源
+## 💰 成本预算
 
-- HTML/CSS基础：https://www.runoob.com/
-- JavaScript教程：https://es6.ruanyifeng.com/
-- Nginx配置：https://www.nginx.org.cn/
-- Vercel文档：https://vercel.com/docs
+### 网站版本
+- 开发：已完成
+- 域名：¥50/年（可选）
+- 托管：Vercel免费
+- **总计**：¥0-50/年
+
+### 小程序版本
+- 开发：4-5周工作量
+- 认证：¥300/年（企业）或免费（个人，功能受限）
+- 服务器：使用队友API，¥0
+- **总计**：¥0-300/年
 
 ---
 
-**项目创建日期**：2026-08-16  
-**当前版本**：v1.0  
-**最后更新**：2026-08-16
+## 🤝 协作事项
 
-祝你的项目成功！🎉
+### 需要与队友确认
+
+1. **平台URL**
+   - [ ] 演讲平台的正式URL
+   - [ ] 辩论平台的正式URL
+   - [ ] 用户登录/注册URL
+
+2. **品牌统一**
+   - [ ] 统一的项目Logo
+   - [ ] 统一的项目名称
+   - [ ] 是否需要统一设计风格
+
+3. **小程序对接**
+   - [ ] 队友是否也开发小程序？
+   - [ ] 是否提供API接口？
+   - [ ] 如何实现用户登录？
+
+---
+
+## 📞 联系方式
+
+- **项目地址**：`D:/JavaWeb/English-web/web`
+- **部署地址**：即将部署到Vercel
+- **团队协作**：与队友的演讲/辩论平台配合
+
+---
+
+## 📚 相关文档
+
+- [Vercel部署完整指南.md](./Vercel部署完整指南.md) - 详细部署步骤
+- [微信小程序开发规划.md](./微信小程序开发规划.md) - 小程序技术方案
+- [网站项目规划-简化版.md](./网站项目规划-简化版.md) - 项目完整规划
+
+---
+
+## 🎯 下一步行动
+
+### 立即完成
+1. 创建GitHub仓库
+2. 推送代码到GitHub
+3. 部署到Vercel
+4. 获取访问URL并测试
+
+### 本周完成
+1. 从队友获取平台URL
+2. 更新网站中的所有链接
+3. 图片优化（压缩背景图）
+4. 邀请用户测试体验
+
+### 两周内完成
+1. 根据反馈优化网站
+2. 决定是否开发小程序
+3. 如果开发小程序，注册账号并学习uni-app
+
+---
+
+## 📝 更新日志
+
+### v1.0 (2026-08-16)
+- ✅ 完成纯HTML网站开发
+- ✅ 初始化Git仓库
+- ✅ 创建Vercel部署配置
+- ✅ 编写部署和小程序开发文档
+
+### 待发布 v1.1
+- ⏳ 部署到Vercel
+- ⏳ 更新队友平台链接
+- ⏳ 用户测试反馈
+
+---
+
+**项目版本**: v1.0  
+**最后更新**: 2026-08-16  
+**开发者**: AI英语学习团队

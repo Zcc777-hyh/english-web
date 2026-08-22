@@ -1,0 +1,104 @@
+/* 通用毛玻璃卡片样式 - 统一 resources/news/about 页面 */
+
+/* 基础毛玻璃卡片 */
+.glass-card {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* 带悬浮动效的毛玻璃卡片 */
+.glass-card-hover {
+    background: rgba(255, 255, 255, 0.18);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+}
+
+.glass-card-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.28);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* 左侧带彩色边框的卡片（用于技巧/赛事卡片） */
+.glass-card-accent-left {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.glass-card-accent-left:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    background: rgba(255, 255, 255, 0.28);
+}
+
+/* 彩色强调边框变体 */
+.accent-red {
+    border-left: 4px solid #DC143C;
+}
+
+.accent-blue {
+    border-left: 4px solid #4169E1;
+}
+
+.accent-green {
+    border-left: 4px solid #28A745;
+}
+
+/* 渐变背景卡片（用于提示/建议区块） */
+.glass-card-gradient {
+    background: linear-gradient(135deg, rgba(255, 245, 245, 0.6), rgba(255, 229, 233, 0.6));
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+/* 联系我们卡片（红色主题渐变） */
+.glass-card-contact {
+    background: linear-gradient(135deg, #DC143C, #B91224);
+    color: white;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(220, 20, 60, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 核心功能容器（浅灰背景） */
+.glass-card-feature-bg {
+    background: rgba(248, 249, 250, 0.7);
+    padding: 24px;
+    border-radius: 12px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(229, 231, 235, 0.5);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .glass-card,
+    .glass-card-hover,
+    .glass-card-accent-left,
+    .glass-card-gradient {
+        padding: 20px;
+    }
+}

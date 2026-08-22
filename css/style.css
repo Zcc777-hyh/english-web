@@ -19,8 +19,11 @@
 body {
     font-family: 'PingFang SC', 'Microsoft YaHei', '微软雅黑', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: var(--text-color);
-    background-color: var(--bg-color);
+    background: #FFFFFF;
     line-height: 1.6;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -290,7 +293,7 @@ a {
 /* 功能特色 */
 .features {
     padding: 80px 0;
-    background: white;
+    background: transparent;
 }
 
 .features-grid {

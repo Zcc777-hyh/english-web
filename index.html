@@ -59,25 +59,18 @@
             </div>
         </section>
 
-    <!-- 树状结构入口 -->
-    <section class="tree-structure">
-        <div class="container">
-            <!-- 根节点 -->
-            <div class="tree-root">
-                <div class="root-node">
-                    <div class="node-icon">🌟</div>
-                    <div class="node-title">讲好中国故事</div>
-                </div>
-            </div>
-
-            <!-- 连接线 -->
-            <div class="tree-lines">
-                <div class="vertical-line"></div>
-                <div class="horizontal-line"></div>
-            </div>
-
-            <!-- 三个分支 -->
+        <!-- 三个分支 -->
             <div class="tree-branches">
+                <div class="branch-item" onclick="window.location.href='#'">
+                    <div class="branch-line"></div>
+                    <div class="branch-card">
+                        <div class="branch-icon">🎤</div>
+                        <h3>演讲训练平台</h3>
+                        <p>AI智能评分反馈<br>提升演讲表达能力</p>
+                        <span class="branch-action">进入演讲平台 →</span>
+                    </div>
+                </div>
+
                 <div class="branch-item" onclick="window.location.href='culture.html'">
                     <div class="branch-line"></div>
                     <div class="branch-card">
@@ -91,16 +84,6 @@
                 <div class="branch-item" onclick="window.location.href='#'">
                     <div class="branch-line"></div>
                     <div class="branch-card">
-                        <div class="branch-icon">🎤</div>
-                        <h3>演讲训练平台</h3>
-                        <p>AI智能评分反馈<br>提升演讲表达能力</p>
-                        <span class="branch-action">进入演讲平台 →</span>
-                    </div>
-                </div>
-
-                <div class="branch-item" onclick="window.location.href='#'">
-                    <div class="branch-line"></div>
-                    <div class="branch-card">
                         <div class="branch-icon">🗣️</div>
                         <h3>辩论训练平台</h3>
                         <p>实时AI对战点评<br>锻炼逻辑思维能力</p>
@@ -108,6 +91,39 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- 风采展示轮播 -->
+    <section class="showcase-gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2>风采展示</h2>
+                <p>历年活动精彩瞬间</p>
+            </div>
+
+            <!-- 年份标签 -->
+            <div class="year-tabs">
+                <button class="year-tab active" data-year="open">公开赛</button>
+                <button class="year-tab" data-year="2023">2023年</button>
+                <button class="year-tab" data-year="2024">2024年</button>
+                <button class="year-tab" data-year="2025">2025年</button>
+                <button class="year-tab" data-year="2026">2026年</button>
+            </div>
+
+            <!-- 轮播容器 -->
+            <div class="carousel-wrapper">
+                <button class="carousel-btn carousel-prev">←</button>
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <!-- 图片由JS动态插入 -->
+                    </div>
+                </div>
+                <button class="carousel-btn carousel-next">→</button>
+            </div>
+
+            <!-- 指示器 -->
+            <div class="carousel-indicators"></div>
         </div>
     </section>
 
@@ -201,7 +217,7 @@
                     <ul>
                         <li><a href="culture.html">文化专栏</a></li>
                         <li><a href="resources.html">学习资源</a></li>
-                        <li><a href="about.html">赛事资讯</a></li>
+                        <li><a href="news.html">赛事资讯</a></li>
                         <li><a href="about.html">关于我们</a></li>
                     </ul>
                 </div>
@@ -221,5 +237,6 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/gallery.js"></script>
 </body>
 </html>
