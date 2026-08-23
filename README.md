@@ -15,28 +15,8 @@
 
 ## 🚀 快速开始
 
-### 本地预览
-
 1. 直接打开浏览器访问：
-   ```
-   file:///D:/JavaWeb/English-web/web/index.html
-   ```
-
-2. 或使用本地服务器（推荐）：
-   ```bash
-   # 方法1：使用Python
-   cd D:/JavaWeb/English-web/web
-   python -m http.server 8080
-   # 访问 http://localhost:8080
-
-   # 方法2：使用Node.js
-   npx http-server -p 8080
-   # 访问 http://localhost:8080
-
-   # 方法3：使用VS Code插件 Live Server
-   # 右键 index.html → "Open with Live Server"
-   ```
-
+aidb.net.cn
 ---
 
 ## 📦 部署到Vercel
@@ -125,17 +105,6 @@ vercel --prod
 - 辩论平台URL（Header导航 + 首页树状图）
 - 用户登录URL（Header "登录/注册" 按钮）
 
----
-
-## 📱 微信小程序开发
-
-### 技术方案：uni-app（推荐）
-
-**为什么选择uni-app？**
-- ✅ 一次开发，多端运行（微信小程序 + 支付宝小程序 + H5 + App）
-- ✅ 使用Vue 3语法，学习成本低
-- ✅ 组件库丰富（uView UI）
-- ✅ 社区活跃，中文文档完善
 
 **开发周期**：4-5周
 
@@ -389,13 +358,6 @@ web/
 - **部署地址**：即将部署到Vercel
 - **团队协作**：与队友的演讲/辩论平台配合
 
----
-
-## 📚 相关文档
-
-- [Vercel部署完整指南.md](./Vercel部署完整指南.md) - 详细部署步骤
-- [微信小程序开发规划.md](./微信小程序开发规划.md) - 小程序技术方案
-- [网站项目规划-简化版.md](./网站项目规划-简化版.md) - 项目完整规划
 
 ---
 
