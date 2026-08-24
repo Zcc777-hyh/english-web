@@ -32,9 +32,56 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Toast 消息提示
+function showToast(message, duration = 2500) {
+    // 创建 toast 元素
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+
+    // 显示动画
+    setTimeout(() => toast.classList.add('show'), 10);
+
+    // 自动消失
+    setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+}
+
+// 跳转到演讲平台二维码
+function navigateToSpeechQRCode() {
+    // 存储标记到 sessionStorage
+    sessionStorage.setItem('showSpeechToast', 'true');
+    window.location.href = 'index.html#speech-platform';
+}
+
+// 跳转到辩论平台二维码
+function navigateToDebateQRCode() {
+    // 存储标记到 sessionStorage
+    sessionStorage.setItem('showDebateToast', 'true');
+    window.location.href = 'index.html#debate-platform';
+}
+
 // 页面加载完成后的初始化
 document.addEventListener('DOMContentLoaded', function() {
     console.log('AI英语学习平台已加载');
+
+    // 检查是否需要显示 Toast
+    if (sessionStorage.getItem('showSpeechToast') === 'true') {
+        sessionStorage.removeItem('showSpeechToast');
+        setTimeout(() => {
+            showToast('📱 打开微信小程序，精彩内容等你体验');
+        }, 500);
+    }
+
+    if (sessionStorage.getItem('showDebateToast') === 'true') {
+        sessionStorage.removeItem('showDebateToast');
+        setTimeout(() => {
+            showToast('📱 打开微信小程序，精彩内容等你体验');
+        }, 500);
+    }
 
     // 添加滚动效果
     let lastScroll = 0;

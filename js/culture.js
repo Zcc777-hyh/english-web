@@ -135,7 +135,7 @@ function renderTopics(filteredTopics) {
     }
 
     grid.innerHTML = filteredTopics.map(topic => `
-        <div class="topic-card" onclick="alert('主题详情页将在后续开发')">
+        <div class="topic-card" onclick="navigateToSpeechQRCode()">
             <div class="topic-card-header" style="background: ${topic.background}">
                 <span class="topic-emoji">${topic.emoji}</span>
                 <div class="topic-tags">

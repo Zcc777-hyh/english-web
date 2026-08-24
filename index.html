@@ -27,9 +27,8 @@
             </nav>
 
             <div class="header-actions">
-                <a href="#" class="btn btn-link">🎤 演讲平台</a>
-                <a href="#" class="btn btn-link">🗣️ 辩论平台</a>
-                <a href="#" class="btn btn-primary">登录/注册</a>
+                <a href="javascript:void(0);" onclick="navigateToSpeechQRCode()" class="btn btn-link">🎤 演讲平台</a>
+                <a href="javascript:void(0);" onclick="navigateToDebateQRCode()" class="btn btn-link">🗣️ 辩论平台</a>
             </div>
 
             <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
@@ -44,9 +43,8 @@
         <a href="news.html">赛事资讯</a>
         <a href="about.html">关于我们</a>
         <hr>
-        <a href="#">🎤 演讲平台</a>
-        <a href="#">🗣️ 辩论平台</a>
-        <a href="#">登录/注册</a>
+        <a href="javascript:void(0);" onclick="navigateToSpeechQRCode()">🎤 演讲平台</a>
+        <a href="javascript:void(0);" onclick="navigateToDebateQRCode()">🗣️ 辩论平台</a>
     </div>
 
     <!-- 首页主容器 - 背景图片区域 -->
@@ -61,13 +59,15 @@
 
         <!-- 三个分支 -->
             <div class="tree-branches">
-                <div class="branch-item" onclick="window.location.href='#'">
+                <div class="branch-item" id="speech-platform" onclick="window.location.href='#'">
                     <div class="branch-line"></div>
                     <div class="branch-card">
-                        <div class="branch-icon">🎤</div>
+                        <div class="branch-icon">
+                            <img src="images/speech-qrcode.jpg" alt="演讲平台小程序二维码" style="width: 150px; height: 150px; border-radius: 8px;">
+                        </div>
                         <h3>演讲训练平台</h3>
-                        <p>AI智能评分反馈<br>提升演讲表达能力</p>
-                        <span class="branch-action">进入演讲平台 →</span>
+                        <p>扫码进入小程序<br>AI智能评分反馈</p>
+                        <span class="branch-action">进入管理平台 →</span>
                     </div>
                 </div>
 
@@ -81,13 +81,15 @@
                     </div>
                 </div>
 
-                <div class="branch-item" onclick="window.location.href='#'">
+                <div class="branch-item" id="debate-platform" onclick="window.location.href='https://cloud1-d8g0k0m526d61652a-1469475059.tcloudbaseapp.com'">
                     <div class="branch-line"></div>
                     <div class="branch-card">
-                        <div class="branch-icon">🗣️</div>
+                        <div class="branch-icon">
+                            <img src="images/debate-qrcode.jpg" alt="辩论平台小程序二维码" style="width: 150px; height: 150px; border-radius: 8px;">
+                        </div>
                         <h3>辩论训练平台</h3>
-                        <p>实时AI对战点评<br>锻炼逻辑思维能力</p>
-                        <span class="branch-action">进入辩论平台 →</span>
+                        <p>扫码进入小程序<br>实时AI对战点评</p>
+                        <span class="branch-action">进入管理平台 →</span>
                     </div>
                 </div>
             </div>
