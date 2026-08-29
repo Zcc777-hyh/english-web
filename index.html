@@ -8,6 +8,8 @@
     <title>讲好中国故事 - AI英语学习平台</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/survey-widget.css">
+    <link rel="stylesheet" href="css/survey-dashboard.css">
 </head>
 <body>
     <!-- 导航栏 -->
@@ -165,6 +167,47 @@
         </div>
     </section>
 
+    <!-- 用户满意度概览 -->
+    <section class="survey-dashboard-section" id="surveyDashboardSection">
+        <div class="container">
+            <div class="section-header">
+                <h2>用户满意度概览</h2>
+                <p>倾听用户声音，持续优化产品价值</p>
+            </div>
+
+            <div class="survey-demo-banner" id="surveyDemoBanner" hidden>
+                📊 当前展示为演示数据，真实用户反馈积累到一定数量后将自动切换
+            </div>
+
+            <div class="survey-compare-cards" id="surveyCompareCards"></div>
+
+            <div class="survey-block">
+                <h3 class="survey-block-title">🎯 能力提升效果对比</h3>
+                <div class="survey-radar-grid" id="surveyRadarGrid"></div>
+            </div>
+
+            <div class="survey-block">
+                <h3 class="survey-block-title">🤖 AI评分合理性评价</h3>
+                <div class="survey-donut-grid" id="surveyDonutGrid"></div>
+            </div>
+
+            <div class="survey-block">
+                <h3 class="survey-block-title">💬 用户真实声音</h3>
+                <div class="survey-quotes-wall" id="surveyQuotesWall"></div>
+                <div class="survey-load-more-wrap" id="surveyLoadMoreWrap" hidden>
+                    <button class="btn btn-secondary" id="surveyLoadMoreBtn" type="button">加载更多</button>
+                </div>
+            </div>
+
+            <div class="survey-cta-band">
+                <h2>两大平台，用效果说话</h2>
+                <p>加入我们，用英语讲好中国故事</p>
+                <div class="survey-cta-stats" id="surveyCtaStats"></div>
+                <button class="btn btn-primary" type="button" onclick="document.querySelector('.header-actions')?.scrollIntoView({behavior:'smooth'})">立即体验</button>
+            </div>
+        </div>
+    </section>
+
     <!-- 使用流程 -->
     <section class="how-it-works-horizontal">
         <div class="container">
@@ -240,5 +283,13 @@
 
     <script src="js/main.js"></script>
     <script src="js/gallery.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/5.5.1/echarts.min.js" onerror="this.onerror=null;this.src='js/vendor/echarts.min.js';"></script>
+    <script src="js/survey-config.js"></script>
+    <script src="js/survey-questions.js"></script>
+    <script src="js/survey-stats.js"></script>
+    <script src="js/survey-store.js"></script>
+    <script src="js/survey-mock.js"></script>
+    <script src="js/survey-widget.js"></script>
+    <script src="js/survey-dashboard.js"></script>
 </body>
 </html>

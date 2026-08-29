@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>满意度调查 - 测试页</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/survey-widget.css">
+    <style>
+        body {
+            padding: 40px 20px;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 12px;
+        }
+        .test-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #DC143C;
+        }
+        .test-info {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .test-btn {
+            padding: 12px 24px;
+            background: #DC143C;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .test-btn:hover {
+            background: #B91224;
+            transform: translateY(-2px);
+        }
+        .test-debug {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .test-debug h3 {
+            margin: 0 0 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        .test-debug pre {
+            background: #f5f5f5;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="test-title">满意度调查测试</h1>
+        <div class="test-info">
+            <strong>测试内容：</strong><br>
+            1. 点击下方按钮打开问卷<br>
+            2. 选择平台（辩论/演讲）<br>
+            3. 填写 5 道题（单选 + 多选 + 星级）<br>
+            4. 提交后查看本地存储的数据<br><br>
+            <strong>当前配置：</strong>API_BASE =
+            <code id="apiBase" style="background:#ffe; padding:2px 6px; border-radius:3px;"></code>
+            （为空时数据存 localStorage，填上后提交到云端）
+        </div>
+
+        <button class="test-btn" onclick="SurveyWidget.open()">🧪 打开问卷测试</button>
+
+        <div class="test-debug">
+            <h3>📋 本地存储数据（实时）</h3>
+            <button onclick="refreshDebug()" style="padding:6px 12px; font-size:13px; margin-bottom:10px; cursor:pointer; border-radius:4px; border:1px solid #ccc; background:#fff;">刷新</button>
+            <button onclick="clearDebug()" style="padding:6px 12px; font-size:13px; margin-bottom:10px; cursor:pointer; border-radius:4px; border:1px solid #dc143c; background:#fff; color:#dc143c; margin-left:8px;">清空数据</button>
+            <pre id="debugOutput"></pre>
+        </div>
+    </div>
+
+    <script src="js/survey-config.js"></script>
+    <script src="js/survey-questions.js"></script>
+    <script src="js/survey-stats.js"></script>
+    <script src="js/survey-store.js"></script>
+    <script src="js/survey-widget.js"></script>
+    <script>
+        document.getElementById('apiBase').textContent = SURVEY_CONFIG.API_BASE || '（空）';
+
+        function refreshDebug() {
+            const data = {
+                records: SurveyStore.getLocalRecords(),
+                submitted: SurveyStore.submittedPlatforms(),
+                visitorId: SurveyStore.getVisitorId()
+            };
+            document.getElementById('debugOutput').textContent = JSON.stringify(data, null, 2);
+        }
+
+        function clearDebug() {
+            if (!confirm('确定清空所有本地数据吗？')) return;
+            localStorage.removeItem('survey_data');
+            localStorage.removeItem('survey_submitted');
+            localStorage.removeItem('survey_visitor_id');
+            localStorage.removeItem('survey_pending');
+            refreshDebug();
+            alert('已清空');
+            location.reload();
+        }
+
+        // 页面加载时显示初始数据
+        refreshDebug();
+
+        // 每秒自动刷新一次调试输出
+        setInterval(refreshDebug, 1000);
+    </script>
+</body>
+</html>

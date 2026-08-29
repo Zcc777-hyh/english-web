@@ -1,0 +1,9 @@
+{
+  "name": "survey",
+  "version": "1.0.0",
+  "description": "满意度调查 云函数：POST 提交问卷 / GET 聚合统计",
+  "main": "index.js",
+  "dependencies": {
+    "@cloudbase/node-sdk": "3.18.0"
+  }
+}

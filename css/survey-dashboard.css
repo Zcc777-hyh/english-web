@@ -1,0 +1,306 @@
+/* 首页 - 用户满意度概览展示区 */
+
+.survey-dashboard-section {
+    padding: 80px 0;
+    background: #FAFAFA;
+}
+
+.survey-demo-banner {
+    background: #FFF7ED;
+    color: #C2410C;
+    border: 1px solid #FED7AA;
+    border-radius: 10px;
+    padding: 12px 20px;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+/* 顶部对比卡片 */
+.survey-compare-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.survey-compare-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    border: 1px solid #eee;
+}
+
+.survey-compare-card.debate {
+    border-top: 4px solid #2563EB;
+}
+
+.survey-compare-card.speech {
+    border-top: 4px solid #EA580C;
+}
+
+.survey-compare-icon {
+    font-size: 28px;
+}
+
+.survey-compare-card h3 {
+    font-size: 16px;
+    margin: 8px 0 16px;
+    color: #333;
+}
+
+.survey-compare-score {
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.survey-compare-card.debate .survey-compare-score {
+    color: #2563EB;
+}
+
+.survey-compare-card.speech .survey-compare-score {
+    color: #EA580C;
+}
+
+.survey-compare-count {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 8px;
+}
+
+/* 通用板块 */
+.survey-block {
+    margin-bottom: 56px;
+}
+
+.survey-block-title {
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+/* 雷达图 */
+.survey-radar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.survey-radar-item {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.survey-radar-label {
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 8px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    display: inline-block;
+}
+
+.survey-radar-label.debate {
+    color: #2563EB;
+    background: #EFF6FF;
+}
+
+.survey-radar-label.speech {
+    color: #EA580C;
+    background: #FFF7ED;
+}
+
+.survey-radar-chart {
+    width: 100%;
+    height: 280px;
+}
+
+/* 环形图 */
+.survey-donut-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.survey-donut-item {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.survey-donut-label {
+    text-align: center;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 8px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    display: inline-block;
+}
+
+.survey-donut-label.debate {
+    color: #2563EB;
+    background: #EFF6FF;
+}
+
+.survey-donut-label.speech {
+    color: #EA580C;
+    background: #FFF7ED;
+}
+
+.survey-donut-chart {
+    width: 100%;
+    height: 240px;
+}
+
+/* 无图表兜底表格 */
+.survey-fallback-table {
+    width: 100%;
+    font-size: 13px;
+    border-collapse: collapse;
+}
+
+.survey-fallback-table td {
+    padding: 6px 4px;
+    border-bottom: 1px solid #f0f0f0;
+}
+/* 反馈卡片墙 */
+.survey-quotes-wall {
+    max-height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-right: 4px;
+}
+
+.survey-quote-card {
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 13.5px;
+    line-height: 1.6;
+}
+
+.survey-quote-card.debate {
+    background: #EFF6FF;
+    border-left: 4px solid #2563EB;
+}
+
+.survey-quote-card.speech {
+    background: #FFF7ED;
+    border-left: 4px solid #EA580C;
+}
+
+.survey-quote-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.survey-quote-name {
+    font-weight: 700;
+    color: #333;
+    font-size: 13px;
+}
+
+.survey-quote-stars {
+    color: #FBBF24;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.survey-quote-text {
+    color: #444;
+}
+
+.survey-quote-time {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: #999;
+}
+
+.survey-quote-empty {
+    text-align: center;
+    color: #999;
+    padding: 24px 0;
+    font-size: 13.5px;
+}
+
+.survey-load-more-wrap {
+    text-align: center;
+    margin-top: 16px;
+}
+
+/* 底部宣传区 */
+.survey-cta-band {
+    background: linear-gradient(135deg, #2563EB, #EA580C);
+    border-radius: 20px;
+    padding: 48px 32px;
+    text-align: center;
+    color: #fff;
+}
+
+.survey-cta-band h2 {
+    color: #fff;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.survey-cta-band p {
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 32px;
+}
+
+.survey-cta-stats {
+    display: flex;
+    justify-content: center;
+    gap: 56px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.survey-cta-stat-number {
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.survey-cta-stat-label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-top: 4px;
+}
+
+.survey-cta-band .btn {
+    background: #fff;
+    color: #1C1C1E;
+}
+
+.survey-cta-band .btn:hover {
+    background: #f2f2f2;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .survey-compare-cards,
+    .survey-radar-grid,
+    .survey-donut-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .survey-dashboard-section {
+        padding: 56px 0;
+    }
+
+    .survey-cta-stats {
+        gap: 32px;
+    }
+}
+
