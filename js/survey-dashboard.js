@@ -32,6 +32,97 @@ const SurveyDashboard = (function () {
         return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
     }
 
+    // 头像：按用户代号哈希取色，保证同一用户每次渲染颜色一致
+    const AVATAR_PALETTE = ['#60A5FA', '#34D399', '#FBBF24', '#F472B6', '#A78BFA', '#FB923C', '#38BDF8', '#4ADE80'];
+
+    function avatarColor(code) {
+        const str = String(code || '');
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) hash = (hash * 31 + str.charCodeAt(i)) >>> 0;
+        return AVATAR_PALETTE[hash % AVATAR_PALETTE.length];
+    }
+
+    function avatarInitials(code) {
+        const match = String(code || '').match(/[A-Za-z0-9]+$/);
+        const tail = match ? match[0] : String(code || '');
+        return tail.slice(-2).toUpperCase() || '匿';
+    }
+
+    // 评分标签：不同分段配色区分，但都用同一套柔和色板，避免突兀
+    function ratingTagInfo(rating) {
+        const r = Number(rating) || 0;
+        if (r >= 5) return { cls: 'tag-5', label: '力荐' };
+        if (r === 4) return { cls: 'tag-4', label: '推荐' };
+        if (r === 3) return { cls: 'tag-3', label: '一般' };
+        return { cls: 'tag-low', label: '吐槽' };
+    }
+
+    // 真实感排序：按评分分桶，用「剩余占比最高者优先」的公平调度算法交叉排列，
+    // 保证不会连续多条同评分扎堆，5 星之间至少间隔 1 条其他评分。
+    function interleaveByRating(list) {
+        if (list.length <= 2) return list.slice();
+
+        const buckets = {};
+        list.forEach(q => {
+            const r = Number(q.rating) || 0;
+            if (!buckets[r]) buckets[r] = [];
+            buckets[r].push(q);
+        });
+        const ratings = Object.keys(buckets).map(Number);
+        const cursors = {};
+        ratings.forEach(r => { cursors[r] = 0; });
+
+        const result = [];
+        let lastRating = null;
+
+        while (result.length < list.length) {
+            const candidates = ratings
+                .filter(r => cursors[r] < buckets[r].length)
+                .sort((a, b) => {
+                    const remainA = (buckets[a].length - cursors[a]) / buckets[a].length;
+                    const remainB = (buckets[b].length - cursors[b]) / buckets[b].length;
+                    if (remainB !== remainA) return remainB - remainA;
+                    return b - a; // 占比相同时评分高的适当靠前
+                });
+
+            let pick = candidates.find(r => r !== lastRating);
+            if (pick === undefined) pick = candidates[0];
+
+            // 5 星评论强制间隔：不允许与上一条同为 5 星
+            if (pick === 5 && lastRating === 5) {
+                const alt = candidates.find(r => r !== 5);
+                if (alt !== undefined) pick = alt;
+            }
+
+            const bucket = buckets[pick];
+            result.push(bucket[cursors[pick]]);
+            cursors[pick] += 1;
+            lastRating = pick;
+        }
+
+        return result;
+    }
+
+    // 展示优先级：3星及以上优先呈现并交叉排列；2星及以下（占比很低，仅作真实感点缀）
+    // 整体靠后但分散插入，不扎堆堆在最末尾。
+    function arrangeForDisplay(list) {
+        const high = list.filter(q => (Number(q.rating) || 0) >= 3);
+        const low = list.filter(q => (Number(q.rating) || 0) < 3);
+
+        const ordered = interleaveByRating(high);
+        if (low.length === 0) return ordered;
+
+        const startIdx = Math.min(ordered.length, Math.ceil(ordered.length * 0.6));
+        const span = Math.max(1, ordered.length - startIdx);
+        low.forEach((q, i) => {
+            const basePos = startIdx + Math.round((i * span) / Math.max(1, low.length));
+            const pos = Math.min(ordered.length, basePos + i);
+            ordered.splice(pos, 0, q);
+        });
+
+        return ordered;
+    }
+
     // ---------- 顶部对比卡片 ----------
 
     function renderCompareCards(stats) {
@@ -177,13 +268,23 @@ const SurveyDashboard = (function () {
         const visible = allQuotes.slice(0, quotesShown);
         visible.forEach(q => {
             const card = el('div', 'survey-quote-card ' + q.platform);
+
+            const avatar = el('div', 'survey-quote-avatar', avatarInitials(q.code));
+            avatar.style.background = avatarColor(q.code);
+            card.appendChild(avatar);
+
+            const body = el('div', 'survey-quote-body');
             const head = el('div', 'survey-quote-head');
             head.appendChild(el('span', 'survey-quote-name', q.code));
+            const tag = ratingTagInfo(q.rating);
+            head.appendChild(el('span', 'survey-quote-tag ' + tag.cls, tag.label));
             head.appendChild(el('span', 'survey-quote-stars', starString(q.rating)));
-            card.appendChild(head);
-            card.appendChild(el('p', 'survey-quote-text', q.text));
+            body.appendChild(head);
+            body.appendChild(el('p', 'survey-quote-text', q.text));
             const time = formatDate(q.time);
-            if (time) card.appendChild(el('div', 'survey-quote-time', time));
+            if (time) body.appendChild(el('div', 'survey-quote-time', time));
+            card.appendChild(body);
+
             wall.appendChild(card);
         });
 
@@ -193,12 +294,14 @@ const SurveyDashboard = (function () {
     function mergeQuotes(stats) {
         const debateQuotes = (stats.debate && stats.debate.quotes || []).map(q => Object.assign({ platform: 'debate' }, q));
         const speechQuotes = (stats.speech && stats.speech.quotes || []).map(q => Object.assign({ platform: 'speech' }, q));
-        return debateQuotes.concat(speechQuotes).sort((a, b) => {
+        const byRecency = debateQuotes.concat(speechQuotes).sort((a, b) => {
             if (!a.time && !b.time) return 0;
             if (!a.time) return 1;
             if (!b.time) return -1;
             return new Date(b.time) - new Date(a.time);
         });
+        // 同评分内保留新→旧顺序，评分之间按真实感交叉排列；低分（2星及以下）整体靠后展示
+        return arrangeForDisplay(byRecency);
     }
 
     function bindLoadMore() {
