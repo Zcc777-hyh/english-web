@@ -11,6 +11,9 @@ const SURVEY_CONFIG = {
     // 真实数据少于该条数时，展示页整页切换为演示模式
     DEMO_THRESHOLD: 5,
 
+    // 真实评价少于该条数时，评论区穿插展示示例反馈（并在评论区上方标注）
+    QUOTES_REAL_THRESHOLD: 200,
+
     // localStorage 键名
     STORAGE_KEYS: {
         records: 'survey_data',

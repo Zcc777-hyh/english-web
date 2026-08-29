@@ -295,10 +295,25 @@ const SurveyDashboard = (function () {
     // 按分数从高到低排序，同分再按时间从新到旧排序。
     const FRIENDLY_RATING_THRESHOLD = 4;
 
-    function mergeQuotes(stats) {
+    // demo（全站演示模式）为 true 时 stats 本身就是 SURVEY_MOCK_STATS，无需再叠加；
+    // 非 demo 但真实评价总数不足 QUOTES_REAL_THRESHOLD 条时，用示例反馈穿插补足，
+    // 并在评论区上方点亮 #surveyQuotesBanner 提示。
+    function mergeQuotes(stats, demo) {
         const debateQuotes = (stats.debate && stats.debate.quotes || []).map(q => Object.assign({ platform: 'debate' }, q));
         const speechQuotes = (stats.speech && stats.speech.quotes || []).map(q => Object.assign({ platform: 'speech' }, q));
-        const byRecency = debateQuotes.concat(speechQuotes).sort((a, b) => {
+        let combined = debateQuotes.concat(speechQuotes);
+
+        let mixed = false;
+        if (!demo && combined.length < SURVEY_CONFIG.QUOTES_REAL_THRESHOLD) {
+            const mockDebate = (SURVEY_MOCK_STATS.debate.quotes || []).map(q => Object.assign({ platform: 'debate' }, q));
+            const mockSpeech = (SURVEY_MOCK_STATS.speech.quotes || []).map(q => Object.assign({ platform: 'speech' }, q));
+            combined = combined.concat(mockDebate, mockSpeech);
+            mixed = true;
+        }
+        const quotesBanner = document.getElementById('surveyQuotesBanner');
+        if (quotesBanner) quotesBanner.hidden = !mixed;
+
+        const byRecency = combined.sort((a, b) => {
             if (!a.time && !b.time) return 0;
             if (!a.time) return 1;
             if (!b.time) return -1;
@@ -365,7 +380,7 @@ const SurveyDashboard = (function () {
         renderRadarBlock(stats);
         renderDonutBlock(stats);
 
-        allQuotes = mergeQuotes(stats);
+        allQuotes = mergeQuotes(stats, demo);
         quotesShown = QUOTES_PAGE_SIZE;
         renderQuotesWall();
 
