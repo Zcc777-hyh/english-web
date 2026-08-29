@@ -190,15 +190,23 @@ const SurveyDashboard = (function () {
         loadMoreWrap.hidden = quotesShown >= allQuotes.length;
     }
 
+    // 评论区默认只展示高分（4-5星）真实反馈，营造友好的展示氛围；
+    // 按分数从高到低排序，同分再按时间从新到旧排序。
+    const FRIENDLY_RATING_THRESHOLD = 4;
+
     function mergeQuotes(stats) {
         const debateQuotes = (stats.debate && stats.debate.quotes || []).map(q => Object.assign({ platform: 'debate' }, q));
         const speechQuotes = (stats.speech && stats.speech.quotes || []).map(q => Object.assign({ platform: 'speech' }, q));
-        return debateQuotes.concat(speechQuotes).sort((a, b) => {
-            if (!a.time && !b.time) return 0;
-            if (!a.time) return 1;
-            if (!b.time) return -1;
-            return new Date(b.time) - new Date(a.time);
-        });
+        return debateQuotes.concat(speechQuotes)
+            .filter(q => (Number(q.rating) || 0) >= FRIENDLY_RATING_THRESHOLD)
+            .sort((a, b) => {
+                const ratingDiff = (Number(b.rating) || 0) - (Number(a.rating) || 0);
+                if (ratingDiff !== 0) return ratingDiff;
+                if (!a.time && !b.time) return 0;
+                if (!a.time) return 1;
+                if (!b.time) return -1;
+                return new Date(b.time) - new Date(a.time);
+            });
     }
 
     function bindLoadMore() {
