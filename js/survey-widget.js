@@ -375,7 +375,7 @@ const SurveyWidget = (function () {
     function renderThanksStep() {
         const wrap = el('div', 'survey-thanks');
         wrap.appendChild(el('div', 'survey-thanks-emoji', '🎉'));
-        wrap.appendChild(el('h3', 'survey-thanks-title', state.submitWasUpdate ? '评价已更新！' : '感谢您的反馈！'));
+        wrap.appendChild(el('h3', 'survey-thanks-title', state.submitWasUpdate ? '已更新评价' : '提交成功，感谢您的评价！'));
         wrap.appendChild(el('p', 'survey-thanks-text', '您的意见将帮助我们做得更好'));
         return wrap;
     }
@@ -459,7 +459,7 @@ const SurveyWidget = (function () {
                 render();
                 refreshLauncher();
                 if (typeof showToast === 'function') {
-                    showToast(wasUpdate ? '评价已更新' : '感谢您的反馈！');
+                    showToast(wasUpdate ? '已更新评价' : '提交成功，感谢您的评价！');
                 }
             } else {
                 if (typeof showToast === 'function') {

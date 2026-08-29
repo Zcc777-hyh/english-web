@@ -74,29 +74,28 @@ body.survey-modal-open {
     flex-direction: column;
 }
 
-.survey-dialog-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 24px 0;
-}
-
-.survey-dialog-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--primary-color);
-    margin: 0;
+.survey-header {
+    position: relative;
+    padding: 28px 60px 16px 28px;
 }
 
 .survey-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
     background: transparent;
-    font-size: 18px;
+    border-radius: 50%;
+    font-size: 20px;
     line-height: 1;
     color: #999;
     cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
 }
 
 .survey-close:hover {
@@ -104,15 +103,7 @@ body.survey-modal-open {
     color: #333;
 }
 
-.survey-progress {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 24px 0;
-}
-
 .survey-progress-bar {
-    flex: 1;
     height: 6px;
     background: #eee;
     border-radius: 4px;
@@ -127,22 +118,23 @@ body.survey-modal-open {
     transition: width 0.3s ease;
 }
 
-.survey-progress-label {
+.survey-step-label {
+    margin-top: 8px;
     font-size: 12px;
     color: #888;
     white-space: nowrap;
 }
 
-.survey-dialog-body {
-    padding: 20px 24px;
+.survey-body {
+    padding: 24px 28px;
     flex: 1;
 }
 
-.survey-dialog-footer {
+.survey-footer {
     display: flex;
     justify-content: space-between;
     gap: 12px;
-    padding: 0 24px 24px;
+    padding: 0 28px 28px;
 }
 /* 平台选择卡片 */
 

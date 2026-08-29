@@ -67,6 +67,21 @@ const SurveyStore = (function () {
         }
     }
 
+    // 把提交内容写入 localStorage 缓存（云端/本地模式都会调用），
+    // 保证刷新页面或关闭窗口后，下次打开问卷仍能从本地立即回填，不必等网络请求。
+    function cacheLocalRecord(payload) {
+        const records = readJSON(KEYS.records, []);
+        const existing = records.findIndex(r =>
+            r.visitorId === payload.visitorId && r.platform === payload.platform
+        );
+        if (existing >= 0) {
+            records[existing] = payload;
+        } else {
+            records.push(payload);
+        }
+        return writeJSON(KEYS.records, records);
+    }
+
     function submitToCloud(payload, callback) {
         fetch(apiUrl(), {
             method: 'POST',
@@ -76,6 +91,7 @@ const SurveyStore = (function () {
             .then(res => res.json())
             .then(data => {
                 if (data.ok) {
+                    cacheLocalRecord(payload);
                     callback(true);
                 } else {
                     console.error('云端提交失败:', data.error);
@@ -91,16 +107,7 @@ const SurveyStore = (function () {
     }
 
     function submitToLocal(payload, callback) {
-        const records = readJSON(KEYS.records, []);
-        const existing = records.findIndex(r =>
-            r.visitorId === payload.visitorId && r.platform === payload.platform
-        );
-        if (existing >= 0) {
-            records[existing] = payload;
-        } else {
-            records.push(payload);
-        }
-        const success = writeJSON(KEYS.records, records);
+        const success = cacheLocalRecord(payload);
         callback(success);
     }
 
@@ -177,33 +184,42 @@ const SurveyStore = (function () {
         return readJSON(KEYS.records, []);
     }
 
+    function findLocalRecord(visitorId, platform) {
+        const records = readJSON(KEYS.records, []);
+        return records.find(r =>
+            r.visitorId === visitorId && r.platform === platform
+        ) || null;
+    }
+
     // 获取当前访客指定平台的最近一次提交记录（用于回填问卷）
+    // 优先读取 localStorage 本地缓存，保证刷新/重开窗口后立即回填；
+    // 本地没有记录时（例如换设备）再尝试云端兜底查询。
     function getLastSubmission(platform) {
         const visitorId = getVisitorId();
-        if (isCloudEnabled()) {
-            // 云端模式：从云函数 GET 接口获取当前访客的记录
-            return new Promise((resolve) => {
-                fetch(apiUrl() + '?visitor_id=' + encodeURIComponent(visitorId) + '&platform=' + encodeURIComponent(platform), {
-                    method: 'GET'
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.ok && data.record) {
-                            resolve(data.record);
-                        } else {
-                            resolve(null);
-                        }
-                    })
-                    .catch(() => resolve(null));
-            });
-        } else {
-            // 本地模式：从 localStorage 查找
-            const records = readJSON(KEYS.records, []);
-            const found = records.find(r =>
-                r.visitorId === visitorId && r.platform === platform
-            );
-            return Promise.resolve(found || null);
+        const local = findLocalRecord(visitorId, platform);
+        if (local) {
+            return Promise.resolve(local);
         }
+
+        if (!isCloudEnabled()) {
+            return Promise.resolve(null);
+        }
+
+        return new Promise((resolve) => {
+            fetch(apiUrl() + '?visitor_id=' + encodeURIComponent(visitorId) + '&platform=' + encodeURIComponent(platform), {
+                method: 'GET'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.ok && data.record) {
+                        cacheLocalRecord(data.record);
+                        resolve(data.record);
+                    } else {
+                        resolve(null);
+                    }
+                })
+                .catch(() => resolve(null));
+        });
     }
 
     return {
