@@ -142,6 +142,67 @@ const SurveyDashboard = (function () {
 
     // ---------- 雷达图 ----------
 
+    // 雷达图维度标签映射（需求要求的展示维度 vs. 实际问卷选项）
+    const RADAR_LABEL_MAP = {
+        debate: {
+            'logic': '逻辑思维',
+            'expression': '语言表达',
+            'adaptability': '临场应变',
+            'confidence': '自信心',
+            'rebuttal': '立论力',
+            'evidence': '说服力',         // 原"反驳能力"映射为"说服力"
+        },
+        speech: {
+            'expression': '语言表达',
+            'pace': '语速节奏',
+            'voice': '声音语调',
+            'gesture': '肢体表达',
+            'confidence': '自信心',
+            'structure': '内容组织'  
+        }
+    };
+
+    function mapRadarDimensions(radarData, platform) {
+        const labelMap = RADAR_LABEL_MAP[platform] || {};
+        return radarData
+            .filter(r => labelMap[r.key])  // 只保留映射表中的维度
+            .map(r => ({
+                key: r.key,
+                label: labelMap[r.key],
+                value: r.value
+            }));
+    }
+
+    function enrichRadarData(realData, realCount) {
+        const threshold = SURVEY_CONFIG.CHART_MOCK_THRESHOLD;
+        if (realCount >= threshold) return { data: realData, isMixed: false };
+
+        // 生成模拟数据：均值 3.8~4.5，随机波动 ±0.3（realData 已按 platform 映射好维度，直接复用顺序）
+        const mockRadar = realData.map(r => {
+            const base = 3.8 + Math.random() * 0.7;  // 3.8~4.5
+            const noise = (Math.random() - 0.5) * 0.6;  // ±0.3
+            return {
+                key: r.key,
+                label: r.label,
+                value: Math.max(1, Math.min(5, +(base + noise).toFixed(1)))
+            };
+        });
+
+        // 按 realCount : mockCount = realCount : (200-realCount) 加权平均
+        const mockCount = threshold - realCount;
+        const merged = mockRadar.map((mock, i) => {
+            const real = realData[i] || { value: 0 };
+            const weighted = (real.value * realCount + mock.value * mockCount) / threshold;
+            return {
+                key: mock.key,
+                label: mock.label,
+                value: +weighted.toFixed(1)
+            };
+        });
+
+        return { data: merged, isMixed: true };
+    }
+
     function renderRadarBlock(stats) {
         const grid = document.getElementById('surveyRadarGrid');
         grid.innerHTML = '';
@@ -152,13 +213,25 @@ const SurveyDashboard = (function () {
 
         ['debate', 'speech'].forEach(key => {
             const meta = PLATFORM_META[key];
-            const data = stats[key] || { radar: [] };
+            const platformData = stats[key] || { radar: [], count: 0 };
+            const realCount = platformData.count || 0;
+            const mapped = mapRadarDimensions(platformData.radar || [], key);
+            const enriched = enrichRadarData(mapped, realCount);
+
             const item = el('div', 'survey-radar-item');
             item.appendChild(el('div', 'survey-radar-label ' + key, meta.name));
 
-            if (hasEcharts() && data.radar && data.radar.length) {
+            if (hasEcharts() && enriched.data && enriched.data.length) {
+                const chartWrap = el('div', 'survey-chart-wrap');
                 const chartEl = el('div', 'survey-radar-chart');
-                item.appendChild(chartEl);
+                chartWrap.appendChild(chartEl);
+
+                if (enriched.isMixed) {
+                    const note = el('div', 'survey-chart-note', '*含模拟数据，用于展示效果');
+                    chartWrap.appendChild(note);
+                }
+
+                item.appendChild(chartWrap);
                 grid.appendChild(item);
 
                 const chart = echarts.init(chartEl);
@@ -168,13 +241,13 @@ const SurveyDashboard = (function () {
                     color: [meta.color],
                     tooltip: {},
                     radar: {
-                        indicator: data.radar.map(r => ({ name: r.label, max: 5 })),
+                        indicator: enriched.data.map(r => ({ name: r.label, max: 5 })),
                         radius: '65%'
                     },
                     series: [{
                         type: 'radar',
                         data: [{
-                            value: data.radar.map(r => r.value),
+                            value: enriched.data.map(r => r.value),
                             name: meta.name,
                             areaStyle: { opacity: 0.25 }
                         }]
@@ -182,7 +255,7 @@ const SurveyDashboard = (function () {
                 });
             } else {
                 item.appendChild(buildFallbackTable(
-                    (data.radar || []).map(r => [r.label, r.value.toFixed(1) + ' / 5'])
+                    (enriched.data || []).map(r => [r.label, r.value.toFixed(1) + ' / 5'])
                 ));
                 grid.appendChild(item);
             }
@@ -190,6 +263,33 @@ const SurveyDashboard = (function () {
     }
 
     // ---------- 环形图 ----------
+
+    // 生成随机但合理的模拟评分分布：合理≥60%，一般≈30%，不合理≤5%
+    // （避免全部满分/极端值，三档比例各自带小幅随机浮动）
+    function randomReasonableSplit(mockCount) {
+        const reasonablePct = 0.60 + Math.random() * 0.12;   // 60%~72%
+        const unreasonablePct = 0.02 + Math.random() * 0.03; // 2%~5%
+
+        const reasonable = Math.round(mockCount * reasonablePct);
+        const unreasonable = Math.round(mockCount * unreasonablePct);
+        const neutral = Math.max(0, mockCount - reasonable - unreasonable);
+
+        return { reasonable: reasonable, neutral: neutral, unreasonable: unreasonable };
+    }
+
+    function enrichDonutData(realSplit, realCount) {
+        const threshold = SURVEY_CONFIG.CHART_MOCK_THRESHOLD;
+        if (realCount >= threshold) return { split: realSplit, isMixed: false };
+
+        const mockCount = threshold - realCount;
+        const mock = randomReasonableSplit(mockCount);
+        const merged = {
+            reasonable: (realSplit.reasonable || 0) + mock.reasonable,
+            neutral: (realSplit.neutral || 0) + mock.neutral,
+            unreasonable: (realSplit.unreasonable || 0) + mock.unreasonable
+        };
+        return { split: merged, isMixed: true };
+    }
 
     function renderDonutBlock(stats) {
         const grid = document.getElementById('surveyDonutGrid');
@@ -201,8 +301,13 @@ const SurveyDashboard = (function () {
 
         ['debate', 'speech'].forEach(key => {
             const meta = PLATFORM_META[key];
-            const data = stats[key] || { reasonable: { reasonable: 0, neutral: 0, unreasonable: 0 } };
-            const r = data.reasonable || { reasonable: 0, neutral: 0, unreasonable: 0 };
+            const platformData = stats[key] || { reasonable: { reasonable: 0, neutral: 0, unreasonable: 0 }, count: 0 };
+            const realSplit = platformData.reasonable || { reasonable: 0, neutral: 0, unreasonable: 0 };
+            const realCount = platformData.count || 0;
+            const enriched = enrichDonutData(realSplit, realCount);
+            const r = enriched.split;
+            const total = (r.reasonable || 0) + (r.neutral || 0) + (r.unreasonable || 0);
+
             const item = el('div', 'survey-donut-item');
             item.appendChild(el('div', 'survey-donut-label ' + key, meta.name));
 
@@ -211,10 +316,20 @@ const SurveyDashboard = (function () {
                 { name: '一般', value: r.neutral || 0 },
                 { name: '不合理', value: r.unreasonable || 0 }
             ];
+            const maxItem = pieData.reduce((a, b) => (b.value > a.value ? b : a), pieData[0]);
+            const centerPct = total > 0 ? Math.round((maxItem.value / total) * 100) : 0;
 
             if (hasEcharts()) {
+                const chartWrap = el('div', 'survey-chart-wrap');
                 const chartEl = el('div', 'survey-donut-chart');
-                item.appendChild(chartEl);
+                chartWrap.appendChild(chartEl);
+
+                if (enriched.isMixed) {
+                    const note = el('div', 'survey-chart-note', '*含模拟数据，用于展示效果');
+                    chartWrap.appendChild(note);
+                }
+
+                item.appendChild(chartWrap);
                 grid.appendChild(item);
 
                 const chart = echarts.init(chartEl);
@@ -230,7 +345,18 @@ const SurveyDashboard = (function () {
                         center: ['50%', '45%'],
                         data: pieData,
                         label: { formatter: '{b}\n{d}%' }
-                    }]
+                    }],
+                    graphic: {
+                        type: 'text',
+                        left: 'center',
+                        top: '40%',
+                        style: {
+                            text: centerPct + '%',
+                            fontSize: 22,
+                            fontWeight: 700,
+                            fill: '#333'
+                        }
+                    }
                 });
             } else {
                 item.appendChild(buildFallbackTable(pieData.map(d => [d.name, String(d.value)])));

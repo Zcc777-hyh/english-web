@@ -14,6 +14,10 @@ const SURVEY_CONFIG = {
     // 真实评价少于该条数时，评论区穿插展示示例反馈（并在评论区上方标注）
     QUOTES_REAL_THRESHOLD: 200,
 
+    // 单平台真实评价少于该条数时，雷达图/环形图自动补充模拟数据凑够 200+ 样本，
+    // 避免图表过空、视觉单薄（仅影响首页展示，不影响问卷本身与真实统计口径）
+    CHART_MOCK_THRESHOLD: 200,
+
     // localStorage 键名
     STORAGE_KEYS: {
         records: 'survey_data',
