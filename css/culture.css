@@ -1,0 +1,232 @@
+.page-container {
+    margin-top: 64px;
+    min-height: calc(100vh - 64px);
+    padding-bottom: 60px;
+}
+
+.page-header {
+    background: linear-gradient(135deg, #DC143C 0%, #B91224 100%);
+    color: white;
+    padding: 60px 24px;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 42px;
+    color: white;
+    margin-bottom: 12px;
+}
+
+.page-header p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.filter-bar {
+    display: flex;
+    gap: 16px;
+    margin: 32px 0 24px;
+    flex-wrap: wrap;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 300px;
+    padding: 12px 16px;
+    font-size: 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    border-color: var(--primary-color);
+}
+
+.filter-select {
+    min-width: 180px;
+    padding: 12px 16px;
+    font-size: 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    background: white;
+    transition: border-color 0.3s;
+}
+
+.filter-select:focus {
+    border-color: var(--primary-color);
+}
+
+.result-info {
+    margin-bottom: 24px;
+    color: #6B7280;
+    font-size: 14px;
+}
+
+.result-info strong {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.topic-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border-color);
+}
+
+.topic-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    border-color: var(--primary-color);
+}
+
+.topic-card-header {
+    position: relative;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.topic-card-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    opacity: 0.9;
+}
+
+.topic-emoji {
+    font-size: 64px;
+    position: relative;
+    z-index: 1;
+}
+
+.topic-tags {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    right: 12px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 2;
+}
+
+.topic-category {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+}
+
+.topic-category.philosophy { background: #8B4513; }
+.topic-category.arts { background: #DC143C; }
+.topic-category.architecture { background: #B8860B; }
+.topic-category.festivals { background: #FF6347; }
+.topic-category.symbols { background: #DC143C; }
+.topic-category.heritage { background: #8B008B; }
+.topic-category.modern { background: #4169E1; }
+
+.topic-difficulty {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+}
+
+.topic-card-body {
+    padding: 20px;
+}
+
+.topic-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1C1C1E;
+    line-height: 1.4;
+    min-height: 44px;
+}
+
+.topic-title-cn {
+    font-size: 14px;
+    color: var(--primary-color);
+    font-family: 'Noto Serif SC', serif;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.topic-description {
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.topic-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.topic-action {
+    color: var(--primary-color);
+    font-size: 14px;
+    font-weight: 500;
+    transition: transform 0.3s;
+}
+
+.topic-card:hover .topic-action {
+    transform: translateX(4px);
+}
+
+@media (max-width: 768px) {
+    .page-header h1 {
+        font-size: 32px;
+    }
+
+    .page-header p {
+        font-size: 16px;
+    }
+
+    .filter-bar {
+        flex-direction: column;
+    }
+
+    .search-input,
+    .filter-select {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    .topics-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习资源 - AI英语学习平台</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/common-cards.css">
+    <link rel="stylesheet" href="css/survey-widget.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🎓</span>
+                <span class="logo-text">AI英语学习</span>
+            </a>
+
+            <nav class="nav">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="culture.html" class="nav-link">文化专栏</a>
+                <a href="resources.html" class="nav-link active">学习资源</a>
+                <a href="news.html" class="nav-link">赛事资讯</a>
+                <a href="about.html" class="nav-link">关于我们</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="javascript:void(0);" onclick="navigateToSpeechQRCode()" class="btn btn-link">🎤 演讲平台</a>
+                <a href="javascript:void(0);" onclick="navigateToDebateQRCode()" class="btn btn-link">🗣️ 辩论平台</a>
+            </div>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
+
+    <!-- 移动端菜单 -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">首页</a>
+        <a href="culture.html">文化专栏</a>
+        <a href="resources.html">学习资源</a>
+        <a href="news.html" >赛事资讯</a>
+        <a href="about.html">关于我们</a>
+        <hr>
+        <a href="javascript:void(0);" onclick="navigateToSpeechQRCode()">🎤 演讲平台</a>
+        <a href="javascript:void(0);" onclick="navigateToDebateQRCode()">🗣️ 辩论平台</a>
+    </div>
+
+    <div style="margin-top: 64px;">
+        <div class="page-header" style="background: linear-gradient(135deg, #4169E1, #1E90FF); color: white; padding: 60px 24px; text-align: center;">
+            <h1 style="color: white;">学习资源</h1>
+            <p>演讲技巧、辩论方法、词汇库等学习资料</p>
+        </div>
+
+        <div class="container" style="padding: 60px 24px;">
+            <!-- 演讲技巧 -->
+            <section style="margin-bottom: 60px;">
+                <h2 style="font-size: 32px; margin-bottom: 32px; color: var(--primary-color);">🎤 演讲技巧</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                    <div class="glass-card-accent-left accent-red">
+                        <h3 style="font-size: 20px; margin-bottom: 12px;">演讲结构</h3>
+                        <p style="color: #6B7280; line-height: 1.8;">
+                            <strong>开头</strong>：吸引注意力（引用、提问、故事）<br>
+                            <strong>主体</strong>：2-3个要点，逻辑清晰<br>
+                            <strong>结尾</strong>：总结观点，呼吁行动
+                        </p>
+                    </div>
+
+                    <div class="glass-card-accent-left accent-red">
+                        <h3 style="font-size: 20px; margin-bottom: 12px;">常用过渡语</h3>
+                        <p style="color: #6B7280; line-height: 1.8;">
+                            • First of all / Secondly / Finally<br>
+                            • Moreover / Furthermore<br>
+                            • In addition / Additionally<br>
+                            • On the other hand / However
+                        </p>
+                    </div>
+
+                    <div class="glass-card-accent-left accent-red">
+                        <h3 style="font-size: 20px; margin-bottom: 12px;">肢体语言</h3>
+                        <p style="color: #6B7280; line-height: 1.8;">
+                            • 保持眼神接触<br>
+                            • 适当的手势强调要点<br>
+                            • 自信的站姿<br>
+                            • 控制语速和音量
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 辩论技巧 -->
+            <section style="margin-bottom: 60px;">
+                <h2 style="font-size: 32px; margin-bottom: 32px; color: var(--primary-color);">🗣️ 辩论技巧</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+                    <div class="glass-card-accent-left accent-blue">
+                        <h3 style="font-size: 20px; margin-bottom: 12px;">构建论证</h3>
+                        <p style="color: #6B7280; line-height: 1.8;">
+                            <strong>主张</strong>：明确你的观点<br>
+                            <strong>证据</strong>：事实、数据、案例<br>
+                            <strong>推理</strong>：解释证据如何支持观点<br>
+                            <strong>结论</strong>：重申立场
+                        </p>
+                    </div>
+
+                    <div class="glass-card-accent-left accent-blue">
+                        <h3 style="font-size: 20px; margin-bottom: 12px;">反驳策略</h3>
+                        <p style="color: #6B7280; line-height: 1.8;">
+                            • 指出逻辑漏洞<br>
+                            • 质疑证据可靠性<br>
+                            • 提供反例<br>
+                            • 重新框架问题
+                        </p>
+                    </div>
+
+                    <div class="glass-card-accent-left accent-blue">
+                        <h3 style="font-size: 20px; margin-bottom: 12px;">常用表达</h3>
+                        <p style="color: #6B7280; line-height: 1.8;">
+                            • I respectfully disagree...<br>
+                            • The evidence suggests that...<br>
+                            • On the contrary...<br>
+                            • This argument fails to consider...
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 核心词汇 -->
+            <section style="margin-bottom: 60px;">
+                <h2 style="font-size: 32px; margin-bottom: 32px; color: var(--primary-color);">📖 核心词汇库</h2>
+                <div class="glass-card">
+                    <h3 style="font-size: 20px; margin-bottom: 20px; color: #4169E1;">文化主题相关词汇</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+                        <div>
+                            <strong style="color: var(--primary-color);">哲学思想</strong>
+                            <ul style="margin-top: 8px; color: #6B7280; font-size: 14px;">
+                                <li>Confucianism 儒家思想</li>
+                                <li>Daoism 道家</li>
+                                <li>Virtue 美德</li>
+                                <li>Harmony 和谐</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong style="color: var(--primary-color);">传统艺术</strong>
+                            <ul style="margin-top: 8px; color: #6B7280; font-size: 14px;">
+                                <li>Calligraphy 书法</li>
+                                <li>Ink painting 水墨画</li>
+                                <li>Opera 戏曲</li>
+                                <li>Embroidery 刺绣</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong style="color: var(--primary-color);">建筑文化</strong>
+                            <ul style="margin-top: 8px; color: #6B7280; font-size: 14px;">
+                                <li>Architecture 建筑</li>
+                                <li>Pavilion 亭</li>
+                                <li>Garden 园林</li>
+                                <li>Courtyard 庭院</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <strong style="color: var(--primary-color);">节日民俗</strong>
+                            <ul style="margin-top: 8px; color: #6B7280; font-size: 14px;">
+                                <li>Solar terms 节气</li>
+                                <li>Festival 节日</li>
+                                <li>Tradition 传统</li>
+                                <li>Custom 习俗</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 实用建议 -->
+            <section>
+                <h2 style="font-size: 32px; margin-bottom: 32px; color: var(--primary-color);">💡 学习建议</h2>
+                <div class="glass-card-gradient">
+                    <ol style="line-height: 2; color: #374151; font-size: 16px;">
+                        <li><strong>每天练习</strong>：坚持每天至少15分钟的演讲或辩论练习</li>
+                        <li><strong>录音反思</strong>：录下自己的练习，回听并找出改进点</li>
+                        <li><strong>模仿优秀范例</strong>：观看TED演讲和经典辩论赛视频</li>
+                        <li><strong>扩充词汇</strong>：每周学习20个与文化主题相关的新词汇</li>
+                        <li><strong>实战演练</strong>：使用AI平台进行真实场景练习</li>
+                    </ol>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>关于项目</h3>
+                    <p>AI英语学习平台致力于通过人工智能技术，帮助学习者提升英语演讲和辩论能力，同时传播中国文化。</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="culture.html">文化专栏</a></li>
+                        <li><a href="resources.html">学习资源</a></li>
+                        <li><a href="news.html">赛事资讯</a></li>
+                        <li><a href="about.html">关于我们</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>联系我们</h3>
+                    <p>📧 contact@example.com</p>
+                    <p>💬 微信公众号</p>
+                    <p>🐙 GitHub</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 AI英语学习平台. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/survey-config.js"></script>
+    <script src="js/survey-questions.js"></script>
+    <script src="js/survey-stats.js"></script>
+    <script src="js/survey-store.js"></script>
+    <script src="js/survey-widget.js"></script>
+</body>
+</html>

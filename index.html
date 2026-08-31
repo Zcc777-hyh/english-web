@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ndky-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI英语学习平台 - 融合中国文化的智能英语演讲和辩论学习系统">
+    <meta name="keywords" content="AI英语学习,中国文化,英语演讲,英语辩论">
+    <title>讲好中国故事 - AI英语学习平台</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/survey-widget.css">
+    <link rel="stylesheet" href="css/survey-dashboard.css">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">🎓</span>
+                <span class="logo-text">AI英语学习</span>
+            </a>
+
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">首页</a>
+                <a href="culture.html" class="nav-link">文化专栏</a>
+                <a href="resources.html" class="nav-link">学习资源</a>
+                <a href="news.html" class="nav-link">赛事资讯</a>
+                <a href="about.html" class="nav-link">关于我们</a>
+            </nav>
+
+            <div class="header-actions">
+                <a href="javascript:void(0);" onclick="navigateToSpeechQRCode()" class="btn btn-link">🎤 演讲平台</a>
+                <a href="javascript:void(0);" onclick="navigateToDebateQRCode()" class="btn btn-link">🗣️ 辩论平台</a>
+            </div>
+
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
+
+    <!-- 移动端菜单 -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">首页</a>
+        <a href="culture.html">文化专栏</a>
+        <a href="resources.html">学习资源</a>
+        <a href="news.html">赛事资讯</a>
+        <a href="about.html">关于我们</a>
+        <hr>
+        <a href="javascript:void(0);" onclick="navigateToSpeechQRCode()">🎤 演讲平台</a>
+        <a href="javascript:void(0);" onclick="navigateToDebateQRCode()">🗣️ 辩论平台</a>
+    </div>
+
+    <!-- 首页主容器 - 背景图片区域 -->
+    <div class="home-main-wrapper">
+        <!-- Hero区域 - 讲好中国故事 -->
+        <section class="hero-new">
+            <div class="hero-content-new">
+                <h1 class="hero-title-new">讲好中国故事</h1>
+                <p class="hero-subtitle-new">通过AI技术驱动，提升英语演讲与辩论能力，用世界语言传播中华文明</p>
+            </div>
+        </section>
+
+        <!-- 三个分支 -->
+            <div class="tree-branches">
+                <div class="branch-item" id="speech-platform" onclick="window.location.href='#'">
+                    <div class="branch-line"></div>
+                    <div class="branch-card">
+                        <div class="branch-icon">
+                            <img src="images/speech-qrcode.jpg" alt="演讲平台小程序二维码" style="width: 150px; height: 150px; border-radius: 8px;">
+                        </div>
+                        <h3>演讲训练平台</h3>
+                        <p>扫码进入小程序<br>AI智能评分反馈</p>
+                        <span class="branch-action">进入管理平台 →</span>
+                    </div>
+                </div>
+
+                <div class="branch-item" onclick="window.location.href='culture.html'">
+                    <div class="branch-line"></div>
+                    <div class="branch-card">
+                        <div class="branch-icon">📚</div>
+                        <h3>中国文化资源库</h3>
+                        <p>90+精选文化主题<br>深入了解中华文明</p>
+                        <span class="branch-action">进入资源库 →</span>
+                    </div>
+                </div>
+
+                <div class="branch-item" id="debate-platform" onclick="window.location.href='https://cloud1-d8g0k0m526d61652a-1469475059.tcloudbaseapp.com'">
+                    <div class="branch-line"></div>
+                    <div class="branch-card">
+                        <div class="branch-icon">
+                            <img src="images/debate-qrcode.jpg" alt="辩论平台小程序二维码" style="width: 150px; height: 150px; border-radius: 8px;">
+                        </div>
+                        <h3>辩论训练平台</h3>
+                        <p>扫码进入小程序<br>实时AI对战点评</p>
+                        <span class="branch-action">进入管理平台 →</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 风采展示轮播 -->
+    <section class="showcase-gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2>风采展示</h2>
+                <p>历年活动精彩瞬间</p>
+            </div>
+
+            <!-- 年份标签 -->
+            <div class="year-tabs">
+                <button class="year-tab active" data-year="open">公开赛</button>
+                <button class="year-tab" data-year="2023">2023年</button>
+                <button class="year-tab" data-year="2024">2024年</button>
+                <button class="year-tab" data-year="2025">2025年</button>
+                <button class="year-tab" data-year="2026">2026年</button>
+            </div>
+
+            <!-- 轮播容器 -->
+            <div class="carousel-wrapper">
+                <button class="carousel-btn carousel-prev">←</button>
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <!-- 图片由JS动态插入 -->
+                    </div>
+                </div>
+                <button class="carousel-btn carousel-next">→</button>
+            </div>
+
+            <!-- 指示器 -->
+            <div class="carousel-indicators"></div>
+        </div>
+    </section>
+
+    <!-- 平台介绍 -->
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>AI技术驱动 讲好中国故事</h2>
+                <p>通过智能演讲与辩论训练，提升英语表达能力，传播中华文明</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI智能驱动</h3>
+                    <p>运用先进的人工智能技术，提供实时语音识别、智能评分和个性化反馈</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🇨🇳</div>
+                    <h3>中国文化资源库</h3>
+                    <p>90+精选主题，涵盖哲学、艺术、建筑、节日、非遗等中华文化精粹</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>双平台训练</h3>
+                    <p>演讲训练提升表达能力，辩论训练锻炼逻辑思维，全面提升英语水平</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌍</div>
+                    <h3>讲好中国故事</h3>
+                    <p>用世界语言传播中华文明，增强文化自信，展示真实立体的中国</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 用户满意度概览 -->
+    <section class="survey-dashboard-section" id="surveyDashboardSection">
+        <div class="container">
+            <div class="section-header">
+                <h2>用户满意度概览</h2>
+                <p>倾听用户声音，持续优化产品价值</p>
+            </div>
+
+            <div class="survey-demo-banner" id="surveyDemoBanner" hidden>
+                📊 当前展示为演示数据，真实用户反馈积累到一定数量后将自动切换
+            </div>
+
+            <div class="survey-compare-cards" id="surveyCompareCards"></div>
+
+            <div class="survey-block">
+                <h3 class="survey-block-title">🎯 能力提升效果对比</h3>
+                <div class="survey-radar-grid" id="surveyRadarGrid"></div>
+            </div>
+
+            <div class="survey-block">
+                <h3 class="survey-block-title">🤖 AI评分合理性评价</h3>
+                <div class="survey-donut-grid" id="surveyDonutGrid"></div>
+            </div>
+
+            <div class="survey-block">
+                <h3 class="survey-block-title">💬 用户真实声音</h3>
+                <div class="survey-demo-banner" id="surveyQuotesBanner" hidden>
+                    📊 当前评论区结合真实反馈与示例内容展示，仅用于效果展示
+                </div>
+                <div class="survey-quotes-wall" id="surveyQuotesWall"></div>
+                <div class="survey-load-more-wrap" id="surveyLoadMoreWrap" hidden>
+                    <button class="btn btn-secondary" id="surveyLoadMoreBtn" type="button">加载更多</button>
+                </div>
+            </div>
+
+            <div class="survey-cta-band">
+                <h2>两大平台，用效果说话</h2>
+                <p>加入我们，用英语讲好中国故事</p>
+                <div class="survey-cta-stats" id="surveyCtaStats"></div>
+                <button class="btn btn-primary" type="button" onclick="document.querySelector('.header-actions')?.scrollIntoView({behavior:'smooth'})">立即体验</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 使用流程 -->
+    <section class="how-it-works-horizontal">
+        <div class="container">
+            <div class="section-header">
+                <h2>如何开始</h2>
+                <p>三步开启你的中国故事英语学习之旅</p>
+            </div>
+
+            <div class="steps-horizontal">
+                <div class="step-item-h">
+                    <div class="step-number-h">1</div>
+                    <div class="step-icon-h">📚</div>
+                    <h3>选择文化主题</h3>
+                    <p>从90+中国文化主题中选择你感兴趣的话题</p>
+                </div>
+
+                <div class="arrow-right">→</div>
+
+                <div class="step-item-h">
+                    <div class="step-number-h">2</div>
+                    <div class="step-icon-h">🎤</div>
+                    <h3>进入训练平台</h3>
+                    <p>选择演讲或辩论模式进行AI互动练习</p>
+                </div>
+
+                <div class="arrow-right">→</div>
+
+                <div class="step-item-h">
+                    <div class="step-number-h">3</div>
+                    <div class="step-icon-h">📈</div>
+                    <h3>获取智能反馈</h3>
+                    <p>AI实时评分提供改进建议</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    </div>
+    <!-- 首页主容器结束 -->
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>关于项目</h3>
+                    <p>AI英语学习平台致力于通过人工智能技术，帮助学习者提升英语演讲和辩论能力，同时传播中国文化。</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="culture.html">文化专栏</a></li>
+                        <li><a href="resources.html">学习资源</a></li>
+                        <li><a href="news.html">赛事资讯</a></li>
+                        <li><a href="about.html">关于我们</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>联系我们</h3>
+                    <p>📧 contact@example.com</p>
+                    <p>💬 微信公众号</p>
+                    <p>🐙 GitHub</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 AI英语学习平台. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/vendor/echarts.min.js"></script>
+    <script src="js/survey-config.js"></script>
+    <script src="js/survey-questions.js"></script>
+    <script src="js/survey-stats.js"></script>
+    <script src="js/survey-store.js"></script>
+    <script src="js/survey-mock.js"></script>
+    <script src="js/survey-widget.js"></script>
+    <script src="js/survey-dashboard.js"></script>
+</body>
+</html>
