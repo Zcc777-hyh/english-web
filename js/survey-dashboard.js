@@ -243,7 +243,6 @@ const SurveyDashboard = (function () {
                 const chartEl = el('div', 'survey-radar-chart');
                 chartWrap.appendChild(chartEl);
 
-
                 item.appendChild(chartWrap);
                 grid.appendChild(item);
 

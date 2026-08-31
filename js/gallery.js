@@ -55,7 +55,7 @@ const galleryData = {
 
 class GalleryCarousel {
     constructor() {
-        this.currentYear = "open"; // 默认显示含金量最高的公开赛
+        this.currentYear = "2026"; // 默认显示含金量最高的公开赛
         this.currentIndex = 0;
         this.autoPlayInterval = null;
         this.isHovering = false;
@@ -158,7 +158,7 @@ class GalleryCarousel {
             if (!this.isHovering && !this.isDragging) {
                 this.nextSlide();
             }
-        }, 7000); // 7秒自动切换
+        }, 3000); // 3秒自动切换
     }
 
     stopAutoPlay() {

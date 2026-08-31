@@ -52,16 +52,48 @@ function showToast(message, duration = 2500) {
 
 // 跳转到演讲平台二维码
 function navigateToSpeechQRCode() {
-    // 存储标记到 sessionStorage
-    sessionStorage.setItem('showSpeechToast', 'true');
-    window.location.href = 'index.html#speech-platform';
+    // 检查是否在首页
+    const isOnHomepage = window.location.pathname.endsWith('index.html') ||
+                        window.location.pathname.endsWith('/') ||
+                        window.location.pathname === '';
+
+    if (isOnHomepage) {
+        // 如果在首页，直接滚动并显示提示
+        const target = document.getElementById('speech-platform');
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(() => {
+                showToast('📱 打开微信小程序，精彩内容等你体验');
+            }, 500);
+        }
+    } else {
+        // 如果不在首页，存储标记并跳转
+        sessionStorage.setItem('showSpeechToast', 'true');
+        window.location.href = 'index.html#speech-platform';
+    }
 }
 
 // 跳转到辩论平台二维码
 function navigateToDebateQRCode() {
-    // 存储标记到 sessionStorage
-    sessionStorage.setItem('showDebateToast', 'true');
-    window.location.href = 'index.html#debate-platform';
+    // 检查是否在首页
+    const isOnHomepage = window.location.pathname.endsWith('index.html') ||
+                        window.location.pathname.endsWith('/') ||
+                        window.location.pathname === '';
+
+    if (isOnHomepage) {
+        // 如果在首页，直接滚动并显示提示
+        const target = document.getElementById('debate-platform');
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(() => {
+                showToast('📱 打开微信小程序，精彩内容等你体验');
+            }, 500);
+        }
+    } else {
+        // 如果不在首页，存储标记并跳转
+        sessionStorage.setItem('showDebateToast', 'true');
+        window.location.href = 'index.html#debate-platform';
+    }
 }
 
 // 页面加载完成后的初始化
